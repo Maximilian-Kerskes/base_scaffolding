@@ -20,7 +20,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 )
 
 # use this if youre targetting POSIX and not just c std
-# target_compile_definitions(shell PRIVATE
+# target_compile_definitions(${PROJECT_NAME} PRIVATE
 #     _POSIX_C_SOURCE=200809L
 # )
 
