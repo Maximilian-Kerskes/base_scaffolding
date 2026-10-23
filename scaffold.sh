@@ -7,8 +7,8 @@ while [[ -L "$SOURCE" ]]; do
 	SOURCE="$(readlink "$SOURCE")"
 
 	if [[ $SOURCE != /* ]]; then
-        SOURCE="$SOURCE_DIR/$SOURCE"
-    fi
+		SOURCE="$SOURCE_DIR/$SOURCE"
+	fi
 done
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
@@ -44,8 +44,8 @@ if [[ ! -d "$TEMPLATE_DIR" ]]; then
 fi
 
 if [[ -d "$project_name" ]]; then
-    echo "Error: project $project_name already exists" >&2
-    exit 1
+	echo "Error: project $project_name already exists" >&2
+	exit 1
 fi
 
 echo "Creating project: $project_name for ${language}..."
