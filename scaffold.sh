@@ -1,6 +1,17 @@
 #!/bin/bash
 
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+SOURCE="${BASH_SOURCE[0]}"
+
+while [[ -L "$SOURCE" ]]; do
+	SOURCE_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
+	SOURCE="$(readlink "$SOURCE")"
+
+	if [[ $SOURCE != /* ]]; then
+        SOURCE="$SOURCE_DIR/$SOURCE"
+    fi
+done
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
 
 set -eu
 
