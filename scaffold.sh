@@ -1,19 +1,6 @@
 #!/bin/bash
 
-SOURCE="${BASH_SOURCE[0]}"
-
-while [[ -L "$SOURCE" ]]; do
-	SOURCE_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
-	SOURCE="$(readlink "$SOURCE")"
-
-	if [[ $SOURCE != /* ]]; then
-		SOURCE="$SOURCE_DIR/$SOURCE"
-	fi
-done
-
-SCRIPT_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
-
-set -eu
+set -euo pipefail
 
 case "${1:-}" in
 --help | -h)
@@ -32,6 +19,19 @@ if [[ $# -ne 2 ]]; then
 	echo "Usage: $0 <language> <project_name>" >&2
 	exit 1
 fi
+
+SOURCE="${BASH_SOURCE[0]}"
+
+while [[ -L "$SOURCE" ]]; do
+	SOURCE_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
+	SOURCE="$(readlink "$SOURCE")"
+
+	if [[ $SOURCE != /* ]]; then
+		SOURCE="$SOURCE_DIR/$SOURCE"
+	fi
+done
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "$SOURCE")" && pwd)"
 
 language="$1"
 project_name="$2"
